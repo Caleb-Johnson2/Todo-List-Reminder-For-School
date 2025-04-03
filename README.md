@@ -1,4 +1,42 @@
 # Todo-List-Reminder-For-School
+## Installation Guide
+**Follow these steps to set up the Todo List system on your computer:**
+
+### 1️⃣ Run the Installer
+Locate and run Installation.bat to set up necessary files and dependencies.
+
+Wait for the installation to complete. Once done, the script is ready to use.
+
+### 2️⃣ Create a Shortcut for todo.txt
+Navigate to the folder where todo.txt is located.
+
+Right-click on todo.txt → Send to → Desktop (Create Shortcut).
+
+Rename the shortcut if desired.
+
+### 3️⃣ Add the Shortcut to the Start Menu
+Move the todo.txt shortcut to:
+
+Windows 10/11: C:\Users\YourUsername\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
+
+This allows you to easily open todo.txt via the Start Menu.
+
+### 4️⃣ Assign Num + Hotkey to Open the Todo List
+Right-click on the todo.txt shortcut and select Properties.
+
+In the Shortcut Key field, press Num + (Numpad Plus key).
+
+Click Apply and OK. Now, pressing Num + will open todo.txt.
+
+### 5️⃣ Change the Icon
+In Properties, click Change Icon.
+
+Browse to the installation folder and select 4697260.ICO.
+
+Click OK, then Apply to save the changes.
+
+**🎉 Setup Complete! You can now manage tasks with ease using todo.txt and the automated reminders! 🚀**
+
 ## Guide to your Todo List
 
 
