@@ -19,33 +19,33 @@ The todo.txt file is the main file where your tasks are stored. The script reads
 Basic Format:
 Tasks should be written in the following format:
 
-- [ ] Task description (MM/DD/YYYY/HH:MM)
+*- [ ] Task description (MM/DD/YYYY/HH:MM)*
 
-- [ ] indicates that the task is incomplete.
+*(- [ ]* indicates that the task is incomplete.
 Task description is a brief summary of the task.
 (MM/DD/YYYY/HH:MM) is the due date and time, in the format Month/Day/Year/Hour:Minute (24-hour format).
 For example:
 
-- [ ] Complete homework (04/05/2025/14:00)
-- [ ] Submit project report (04/06/2025/17:00)
+*- [ ] Complete homework (04/05/2025/14:00)*
+*- [ ] Submit project report (04/06/2025/17:00)*
 
 If a task does not have a due date or if it's not assigned yet, simply omit the date portion:
 
-- [ ] Buy groceries
+*- [ ] Buy groceries*
 
 Important Points:
 Tasks without due dates can be added without the parentheses and date.
 Tasks that have a grade (e.g., from an assignment or homework) but are incomplete or missing should be written with "(No grade/Incomplete)" or similar tags, as handled by the script:
 
-- [ ] Read chapter 5 (No grade/Incomplete)
+*- [ ] Read chapter 5 (No grade/Incomplete)*
 
-Each task should be written on a new line, starting with - [ ].
+Each task should be written on a new line, starting with *- [ ]*.
 Example todo.txt File:
 
-- [ ] Complete homework (04/05/2025/14:00)
-- [ ] Submit project report (04/06/2025/17:00)
-- [ ] Buy groceries
-- [ ] Call mom (No grade/Incomplete)
+*- [ ] Complete homework (04/05/2025/14:00)*
+*- [ ] Submit project report (04/06/2025/17:00)*
+*- [ ] Buy groceries*
+*- [ ] Call mom (No grade/Incomplete)*
 
 The script will process the tasks from this file, determining which are due soon and which have penalties if overdue.
 
@@ -71,9 +71,9 @@ Num -: Instant summary report of tasks.
 
 Editing todo.txt:
 
-Tasks are written with - [ ] Task description (MM/DD/YYYY/HH:MM) for tasks with due dates.
+Tasks are written with *- [ ] Task description (MM/DD/YYYY/HH:MM)* for tasks with due dates.
 
-Tasks without due dates should just have - [ ] Task description.
+Tasks without due dates should just have *- [ ] Task description*.
 
 Notification Time Interval:
 
