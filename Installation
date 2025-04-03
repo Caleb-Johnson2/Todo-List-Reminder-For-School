@@ -27,7 +27,7 @@ echo Installing required Python dependencies...
 
 :: Set the folder and download URL for Todo_List.zip
 set TODO_LIST_DIR=%CD%\Todo_List
-set TODO_LIST_ZIP_URL=https://github.com/your-repo/Todo_List/archive/refs/heads/main.zip
+set TODO_LIST_ZIP_URL=https://github.com/Caleb-Johnson2/Todo-List-Reminder-For-School/archive/refs/heads/main.zip
 
 :: Create the Todo_List folder if it doesn't exist
 if not exist "%TODO_LIST_DIR%" (
@@ -46,7 +46,7 @@ powershell -Command "Expand-Archive -Path \"%TODO_LIST_DIR%\Todo_List.zip\" -Des
 del "%TODO_LIST_DIR%\Todo_List.zip"
 
 :: Set extracted folder path
-set EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List-main
+set EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo-List-Reminder-For-School-main
 
 :: Create the todo.txt file in the extracted Todo_List folder
 echo Creating todo.txt...
