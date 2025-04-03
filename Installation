@@ -52,28 +52,6 @@ set EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo-List-Reminder-For-School-main
 echo Creating todo.txt...
 echo # Your tasks go here > "%EXTRACTED_FOLDER%\todo.txt"
 
-:: Create a shortcut for todo.txt and place it on the taskbar
-echo Creating shortcut for todo.txt...
-set SHORTCUT_PATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Taskbar\TodoShortcut.lnk
-set TARGET_PATH=%EXTRACTED_FOLDER%\todo.txt
-set ICON_PATH=%EXTRACTED_FOLDER%\4697260.ico
-
-:: Use PowerShell to create the shortcut
-powershell -Command ^
-  $WshShell = New-Object -ComObject WScript.Shell; ^
-  $Shortcut = $WshShell.CreateShortcut("%SHORTCUT_PATH%"); ^
-  $Shortcut.TargetPath = "%TARGET_PATH%"; ^
-  $Shortcut.IconLocation = "%ICON_PATH%"; ^
-  $Shortcut.Save()
-
-:: Pin the shortcut to the taskbar using a PowerShell script
-echo Pinning to the taskbar...
-powershell -Command ^
-  $shell = New-Object -ComObject shell.application; ^
-  $folder = $shell.Namespace("%APPDATA%\Microsoft\Windows\Start Menu\Programs\Taskbar"); ^
-  $folderItem = $folder.ParseName("TodoShortcut.lnk"); ^
-  $folderItem.InvokeVerb("pin to taskbar")
-
 :: Run reminder.py
 echo Running reminder.py...
 %PYTHON_COMMAND% "%EXTRACTED_FOLDER%\reminder.py"
