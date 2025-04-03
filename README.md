@@ -21,7 +21,7 @@ Tasks should be written in the following format:
 
 *- [ ] Task description (MM/DD/YYYY/HH:MM)*
 
-*(- [ ]* indicates that the task is incomplete.
+*- [ ]* indicates that the task is incomplete.
 Task description is a brief summary of the task.
 (MM/DD/YYYY/HH:MM) is the due date and time, in the format Month/Day/Year/Hour:Minute (24-hour format).
 For example:
@@ -67,7 +67,7 @@ Hotkeys:
 
 Num -: Instant summary report of tasks.
 
-*Num : Detailed task report with due dates.
+Num *: Detailed task report with due dates.
 
 Editing todo.txt:
 
