@@ -1,0 +1,82 @@
+@echo off
+
+:: Check if Python is installed by checking for python, python3, and py
+python --version >nul 2>&1
+if %errorlevel% == 0 (
+    set PYTHON_COMMAND=python
+) else (
+    python3 --version >nul 2>&1
+    if %errorlevel% == 0 (
+        set PYTHON_COMMAND=python3
+    ) else (
+        py --version >nul 2>&1
+        if %errorlevel% == 0 (
+            set PYTHON_COMMAND=py
+        ) else (
+            echo Python is not installed on your system.
+            echo Please install Python from https://www.python.org/downloads/
+            pause
+            exit /b
+        )
+    )
+)
+
+:: Install dependencies using the detected Python command
+echo Installing required Python dependencies...
+%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
+
+:: Set the folder and download URL for Todo_List.zip
+set TODO_LIST_DIR=%CD%\Todo_List
+set TODO_LIST_ZIP_URL=https://github.com/your-repo/Todo_List/archive/refs/heads/main.zip
+
+:: Create the Todo_List folder if it doesn't exist
+if not exist "%TODO_LIST_DIR%" (
+    mkdir "%TODO_LIST_DIR%"
+)
+
+:: Download Todo_List.zip to the Todo_List folder
+echo Downloading Todo_List.zip...
+powershell -Command "Invoke-WebRequest -Uri %TODO_LIST_ZIP_URL% -OutFile \"%TODO_LIST_DIR%\Todo_List.zip\""
+
+:: Extract Todo_List.zip into the Todo_List folder
+echo Extracting Todo_List.zip...
+powershell -Command "Expand-Archive -Path \"%TODO_LIST_DIR%\Todo_List.zip\" -DestinationPath \"%TODO_LIST_DIR%\""
+
+:: Remove the .zip file after extraction
+del "%TODO_LIST_DIR%\Todo_List.zip"
+
+:: Set extracted folder path
+set EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List-main
+
+:: Create the todo.txt file in the extracted Todo_List folder
+echo Creating todo.txt...
+echo # Your tasks go here > "%EXTRACTED_FOLDER%\todo.txt"
+
+:: Create a shortcut for todo.txt and place it on the taskbar
+echo Creating shortcut for todo.txt...
+set SHORTCUT_PATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Taskbar\TodoShortcut.lnk
+set TARGET_PATH=%EXTRACTED_FOLDER%\todo.txt
+set ICON_PATH=%EXTRACTED_FOLDER%\4697260.ico
+
+:: Use PowerShell to create the shortcut
+powershell -Command ^
+  $WshShell = New-Object -ComObject WScript.Shell; ^
+  $Shortcut = $WshShell.CreateShortcut("%SHORTCUT_PATH%"); ^
+  $Shortcut.TargetPath = "%TARGET_PATH%"; ^
+  $Shortcut.IconLocation = "%ICON_PATH%"; ^
+  $Shortcut.Save()
+
+:: Pin the shortcut to the taskbar using a PowerShell script
+echo Pinning to the taskbar...
+powershell -Command ^
+  $shell = New-Object -ComObject shell.application; ^
+  $folder = $shell.Namespace("%APPDATA%\Microsoft\Windows\Start Menu\Programs\Taskbar"); ^
+  $folderItem = $folder.ParseName("TodoShortcut.lnk"); ^
+  $folderItem.InvokeVerb("pin to taskbar")
+
+:: Run reminder.py
+echo Running reminder.py...
+%PYTHON_COMMAND% "%EXTRACTED_FOLDER%\reminder.py"
+
+echo Installation complete!
+pause
