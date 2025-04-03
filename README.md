@@ -5,6 +5,7 @@ Guide to your Todo List
 The script includes specific hotkeys that allow you to interact with it while it's running. These hotkeys are set to trigger certain actions, such as generating reports or sending notifications. Below are the hotkeys available and what they do:
 
 Hotkeys:
+
 Num -
 Action: Sends an instant summary report of the remaining tasks.
 Description: When you press the "Num -" key, the script will immediately send a notification with a summary of the pending tasks, including their due dates and time remaining until they are due.
