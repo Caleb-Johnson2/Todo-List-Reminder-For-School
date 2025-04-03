@@ -23,7 +23,7 @@ if %errorlevel% == 0 (
 
 :: Install dependencies using the detected Python command
 echo Installing required Python dependencies...
-%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
+%PYTHON_COMMAND% -m pip install keyboard plyer
 
 :: Set the folder and download URL for Todo_List.zip
 set TODO_LIST_DIR=%CD%\Todo_List
