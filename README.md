@@ -138,6 +138,8 @@ Num -: Instant summary report of tasks.
 
 Num *: Detailed task report with due dates.
 
+_If you wish to change these hotkeys, edit 'keyboard.add_hotkey("num -", send_report)' and 'keyboard.add_hotkey("num *", send_full_task_report)'_
+
 **Editing todo.txt:**
 
 Tasks are written with *- [ ] Task description (MM/DD/YYYY/HH:MM)* for tasks with due dates.
