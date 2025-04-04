@@ -28,15 +28,15 @@ def parse_due_date(task):
 def read_todo_list():
     """Reads the todo list and finds the most urgent task."""
     if not os.path.exists(TODO_FILE):
-        return None, []  # No file found, return an empty list instead of 0
-    
+        return None, []  # Ensure pending_tasks is always a list
+
     with open(TODO_FILE, "r", encoding="utf-8") as file:
         lines = file.readlines()
     
     pending_tasks = [line.strip() for line in lines if line.startswith("- [ ]")]
 
     if not pending_tasks:
-        return None, []  # No tasks left, return an empty list instead of 0
+        return None, []  # Ensure an empty list instead of an integer
 
     # Sort tasks by closest due date (if they have one)
     pending_tasks.sort(key=lambda task: parse_due_date(task) or datetime.datetime.max)
@@ -44,7 +44,7 @@ def read_todo_list():
     # Get the most urgent task (earliest due date)
     most_urgent_task = pending_tasks[0]
 
-    return most_urgent_task, pending_tasks  # Always return a list, never an integer
+    return most_urgent_task, pending_tasks
 
 def calculate_time_remaining(due_date):
     """Returns time left in a human-readable format or penalty if overdue."""
