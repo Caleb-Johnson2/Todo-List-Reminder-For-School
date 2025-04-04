@@ -40,6 +40,7 @@ Click OK, then Apply to save the changes.
 ## Guide to your Todo List
 
 
+
 ### 1. Hotkeys
 
 
@@ -150,7 +151,7 @@ Default is 30 minutes (1800 seconds), adjustable by modifying REMINDER_INTERVAL.
 
 **With this manual, you should be able to effectively use the hotkeys, format your tasks in todo.txt, and customize the time interval for notifications.**
 
-
+## TO START PROGRAM, RUN INSTALLATION.BAT
 
 
 
