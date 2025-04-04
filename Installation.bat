@@ -1,26 +1,8 @@
 @echo off
 setlocal
 
-:: Try py first since it's most common on Windows
-where py >nul 2>&1
-if %errorlevel%==0 (
-    set "PYTHON_COMMAND=py"
-) else (
-    where python >nul 2>&1
-    if %errorlevel%==0 (
-        set "PYTHON_COMMAND=python"
-    ) else (
-        where python3 >nul 2>&1
-        if %errorlevel%==0 (
-            set "PYTHON_COMMAND=python3"
-        ) else (
-            echo Python is not installed or not added to PATH.
-            echo Please install it from: https://www.python.org/downloads/
-            pause
-            exit /b
-        )
-    )
-)
+:: Assume py is available
+set "PYTHON_COMMAND=py"
 
 :: Install Python dependencies
 echo Installing required Python dependencies...
