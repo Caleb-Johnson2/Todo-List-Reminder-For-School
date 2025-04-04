@@ -24,7 +24,7 @@ if %errorlevel%==0 (
 
 :: Set up folder and file paths
 set "TODO_LIST_DIR=%CD%\Todo_List"
-set "TODO_LIST_ZIP_URL=https://github.com/Caleb-Johnson2/Todo-List-Reminder-For-School/archive/refs/heads/main.zip"
+set "TODO_LIST_ZIP_URL=https://github.com/Caleb-Johnson2/Todo_List_Program/archive/refs/heads/main.zip"
 set "TODO_FILE=%TODO_LIST_DIR%\todo.txt"
 
 :: Check if todo.txt already exists (i.e., the program is already installed)
@@ -54,7 +54,7 @@ powershell -Command "Expand-Archive -Path '%TODO_LIST_DIR%\Todo_List.zip' -Desti
 del "%TODO_LIST_DIR%\Todo_List.zip"
 
 :: Set path to extracted folder
-set "EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo-List-Reminder-For-School-main"
+set "EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List_Program-main"
 
 :: Create todo.txt file if it doesn't exist
 echo Creating todo.txt...
