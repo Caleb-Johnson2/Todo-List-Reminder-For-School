@@ -48,17 +48,17 @@ The script includes specific hotkeys that allow you to interact with it while it
 
 **Hotkeys:**
 
-Num -
+Alt+Num -
 
 Action: Sends an instant summary report of the remaining tasks.
 
-Description: When you press the "Num -" key, the script will immediately send a notification with a summary of the pending tasks, including their due dates and time remaining until they are due.
+Description: When you press the "Alt" key then the "Num -" key, the script will immediately send a notification with a summary of the pending tasks, including their due dates and time remaining until they are due.
 
-Num *
+Alt+Num *
 
 Action: Sends a detailed report of all tasks.
 
-Description: Pressing the "Num *" key triggers the script to send a detailed report of all tasks, including those with due dates and the remaining time. It will list the tasks with their due dates and the time left until they are due. If a task does not have a due date, it will be listed without that information.
+Description: Pressing the "Alt" key then the "Num *" key triggers the script to send a detailed report of all tasks, including those with due dates and the remaining time. It will list the tasks with their due dates and the time left until they are due. If a task does not have a due date, it will be listed without that information.
 
 
 ### 2. Editing the todo.txt File
@@ -134,9 +134,9 @@ This change will cause the script to send reminders every 60 minutes instead of 
 
 **Hotkeys:**
 
-Num -: Instant summary report of tasks.
+Alt+Num -: Instant summary report of tasks.
 
-Num *: Detailed task report with due dates.
+Alt+Num *: Detailed task report with due dates.
 
 _If you wish to change these hotkeys, edit 'keyboard.add_hotkey("num -", send_report)' and 'keyboard.add_hotkey("num *", send_full_task_report)'_
 
@@ -155,6 +155,7 @@ Default is 30 minutes (1800 seconds), adjustable by modifying REMINDER_INTERVAL.
 
 ### TO START PROGRAM, RUN INSTALLATION.BAT 
 ### CLOSE TERMINAL TO STOP PROGRAM
+### TERMINAL WILL CLOSE ONCE ALL TASKS ARE COMPLETE
 
 
 
