@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-:: Try py first since it's most common on Windows
+:: Detect Python installation
 where py >nul 2>&1
 if %errorlevel%==0 (
     set "PYTHON_COMMAND=py"
@@ -26,19 +26,21 @@ if %errorlevel%==0 (
 set "TODO_LIST_DIR=%CD%\Todo_List"
 set "REPO_ZIP_URL=https://github.com/Caleb-Johnson2/Todo_List_Program/archive/refs/heads/main.zip"
 set "REPO_ZIP=%TODO_LIST_DIR%\Todo_List.zip"
-set "EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List_Program-main"
 
-:: Check if the program is already installed
+:: Find the extracted folder dynamically
+for /d %%D in ("%TODO_LIST_DIR%\Todo_List_Program*") do set "EXTRACTED_FOLDER=%%D"
+
+:: Check if reminder.py exists (indicating installation is complete)
 if exist "%EXTRACTED_FOLDER%\reminder.py" (
-    echo Program already installed. Skipping to running reminder.py...
+    echo Program already installed. Skipping installation...
     goto RunReminder
 )
 
-:: Install Python dependencies
+:: Install dependencies
 echo Installing required Python dependencies...
-%PYTHON_COMMAND% -m pip install keyboard plyer
+%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
 
-:: Create the folder
+:: Create the folder if it doesn't exist
 if not exist "%TODO_LIST_DIR%" mkdir "%TODO_LIST_DIR%"
 
 :: Download the zip
@@ -49,10 +51,17 @@ powershell -Command "Invoke-WebRequest -Uri '%REPO_ZIP_URL%' -OutFile '%REPO_ZIP
 echo Extracting...
 powershell -Command "Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%TODO_LIST_DIR%'"
 
-:: Clean up zip
-del "%REPO_ZIP%"
+:: Find the correct extracted folder again
+for /d %%D in ("%TODO_LIST_DIR%\Todo_List_Program*") do set "EXTRACTED_FOLDER=%%D"
 
-:: Create todo.txt file
+:: Verify extraction
+if not exist "%EXTRACTED_FOLDER%\reminder.py" (
+    echo Error: reminder.py not found after extraction!
+    pause
+    exit /b
+)
+
+:: Create todo.txt if it doesn't exist
 if not exist "%EXTRACTED_FOLDER%\todo.txt" (
     echo Creating todo.txt...
     echo # Your tasks go here > "%EXTRACTED_FOLDER%\todo.txt"
