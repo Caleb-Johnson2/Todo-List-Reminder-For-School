@@ -8,7 +8,8 @@ import winsound  # Windows sound module (adjust for Mac/Linux)
 import re  # For extracting dates
 import threading
 
-TODO_FILE = "todo.txt"
+TODO_LIST_DIR = os.path.join(os.getcwd(), "Todo_List_Program", "Todo_List_Program-main")
+TODO_FILE = os.path.join(TODO_LIST_DIR, "todo.txt")
 REMINDER_INTERVAL = 1800  # 30 minutes (1800 seconds)
 REPORT_TIME = "15:50"  # 3:50 PM in military time
 LATE_POLICY_PENALTY = 10  # -10% per day late
