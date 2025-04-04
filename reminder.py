@@ -6,10 +6,11 @@ import keyboard  # Detects keypress
 from plyer import notification
 import winsound  # Windows sound module (adjust for Mac/Linux)
 import re  # For extracting dates
+import threading
 
 TODO_FILE = "todo.txt"
 REMINDER_INTERVAL = 1800  # 30 minutes (1800 seconds)
-REPORT_TIME = "17:30"  # 5:30 PM in military time
+REPORT_TIME = "15:50"  # 3:50 PM in military time
 LATE_POLICY_PENALTY = 10  # -10% per day late
 
 def remove_parentheses_content(text):
@@ -127,9 +128,15 @@ def main():
     """Main loop: sends reminders, reports, and checks tasks."""
     last_report_date = None  # Track last report date to prevent duplicate reports
 
-    # Detect "Num -" to send an instant report
-    keyboard.add_hotkey("num -", send_report)
-    keyboard.add_hotkey("num *", send_full_task_report)
+    def send_report_thread():
+        threading.Thread(target=send_report, daemon=True).start()
+
+    def send_full_task_report_thread():
+        threading.Thread(target=send_full_task_report, daemon=True).start()
+
+    # Use threads so hotkey functions don’t block the main loop
+    keyboard.add_hotkey("num -", send_report_thread)
+    keyboard.add_hotkey("num *", send_full_task_report_thread)
 
     while True:
         now = datetime.datetime.now()
