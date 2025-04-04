@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-:: Check if Python is installed by checking common commands
+:: Try py first since it's most common on Windows
 where py >nul 2>&1
 if %errorlevel%==0 (
     set "PYTHON_COMMAND=py"
@@ -22,45 +22,44 @@ if %errorlevel%==0 (
     )
 )
 
-:: Set up folder and file paths
+:: Set up paths
 set "TODO_LIST_DIR=%CD%\Todo_List"
-set "TODO_LIST_ZIP_URL=https://github.com/Caleb-Johnson2/Todo_List_Program/archive/refs/heads/main.zip"
-set "TODO_FILE=%TODO_LIST_DIR%\todo.txt"
+set "REPO_ZIP_URL=https://github.com/Caleb-Johnson2/Todo_List_Program/archive/refs/heads/main.zip"
+set "REPO_ZIP=%TODO_LIST_DIR%\Todo_List.zip"
+set "EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List_Program-main"
 
-:: Check if todo.txt already exists (i.e., the program is already installed)
-if exist "%TODO_FILE%" (
-    echo Program already installed, skipping installation steps...
-    echo Launching reminder.py...
-    %PYTHON_COMMAND% "%TODO_LIST_DIR%\reminder.py"
-    goto :eof
+:: Check if the program is already installed
+if exist "%EXTRACTED_FOLDER%\reminder.py" (
+    echo Program already installed. Skipping to running reminder.py...
+    goto RunReminder
 )
 
 :: Install Python dependencies
 echo Installing required Python dependencies...
 %PYTHON_COMMAND% -m pip install keyboard plyer
 
-:: Create the folder if it doesn't exist
+:: Create the folder
 if not exist "%TODO_LIST_DIR%" mkdir "%TODO_LIST_DIR%"
 
 :: Download the zip
 echo Downloading Todo_List.zip...
-powershell -Command "Invoke-WebRequest -Uri '%TODO_LIST_ZIP_URL%' -OutFile '%TODO_LIST_DIR%\Todo_List.zip'"
+powershell -Command "Invoke-WebRequest -Uri '%REPO_ZIP_URL%' -OutFile '%REPO_ZIP%'"
 
 :: Extract the zip
 echo Extracting...
-powershell -Command "Expand-Archive -Path '%TODO_LIST_DIR%\Todo_List.zip' -DestinationPath '%TODO_LIST_DIR%'"
+powershell -Command "Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%TODO_LIST_DIR%'"
 
 :: Clean up zip
-del "%TODO_LIST_DIR%\Todo_List.zip"
+del "%REPO_ZIP%"
 
-:: Set path to extracted folder
-set "EXTRACTED_FOLDER=%TODO_LIST_DIR%\Todo_List_Program-main"
+:: Create todo.txt file
+if not exist "%EXTRACTED_FOLDER%\todo.txt" (
+    echo Creating todo.txt...
+    echo # Your tasks go here > "%EXTRACTED_FOLDER%\todo.txt"
+)
 
-:: Create todo.txt file if it doesn't exist
-echo Creating todo.txt...
-echo # Your tasks go here > "%EXTRACTED_FOLDER%\todo.txt"
-
-:: Run the reminder script
+:: Run reminder.py
+:RunReminder
 echo Launching reminder.py...
 %PYTHON_COMMAND% "%EXTRACTED_FOLDER%\reminder.py"
 
