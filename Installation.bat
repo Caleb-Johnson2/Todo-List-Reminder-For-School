@@ -23,22 +23,23 @@ if %errorlevel%==0 (
 )
 
 :: Set up paths
-set "TODO_LIST_DIR=%CD%\Todo_List_Program"
+set "BASE_DIR=%CD%\Todo_List_Program"
+set "EXTRACTED_DIR=%BASE_DIR%\Todo_List_Program-main"
 set "REPO_ZIP_URL=https://github.com/Caleb-Johnson2/Todo_List_Program/archive/refs/heads/main.zip"
 set "REPO_ZIP=%CD%\Todo_List.zip"
 
 :: If reminder.py exists, skip installation
-if exist "%TODO_LIST_DIR%\reminder.py" (
+if exist "%EXTRACTED_DIR%\reminder.py" (
     echo Program already installed. Skipping installation...
     goto RunReminder
 )
 
 :: Install dependencies
 echo Installing required Python dependencies...
-%PYTHON_COMMAND% -m pip install keyboard plyer
+%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
 
-:: Create the folder if it doesn't exist
-if not exist "%CD%\Todo_List_Program" mkdir "%CD%\Todo_List_Program"
+:: Ensure Todo_List_Program folder exists
+if not exist "%BASE_DIR%" mkdir "%BASE_DIR%"
 
 :: Download the zip
 echo Downloading Todo_List.zip...
@@ -51,36 +52,27 @@ if not exist "%REPO_ZIP%" (
     exit /b
 )
 
-:: Uncompress Todo_List.zip
+:: Uncompress Todo_List.zip into Todo_List_Program
 echo Unzipping Todo_List.zip...
-powershell -Command "& {try { Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%CD%' -Force -ErrorAction Stop; echo Success } catch { echo Unzip failed!; exit 1 }}"
-
-:: Find the correct extracted folder
-for /d %%D in ("%CD%\Todo_List_Program*") do set "EXTRACTED_FOLDER=%%D"
+powershell -Command "& {try { Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%BASE_DIR%' -Force -ErrorAction Stop; echo Success } catch { echo Unzip failed!; exit 1 }}"
 
 :: Verify the extracted folder exists
-if not exist "%EXTRACTED_FOLDER%\reminder.py" (
-    echo Error: reminder.py not found after extraction!
+if not exist "%EXTRACTED_DIR%\reminder.py" (
+    echo Error: reminder.py not found in extracted folder!
     pause
     exit /b
 )
 
-:: Move extracted files into the correct folder
-if not "%EXTRACTED_FOLDER%"=="%TODO_LIST_DIR%" (
-    echo Moving extracted files to the correct location...
-    move "%EXTRACTED_FOLDER%" "%TODO_LIST_DIR%"
-)
-
 :: Create todo.txt if it doesn't exist
-if not exist "%TODO_LIST_DIR%\todo.txt" (
+if not exist "%EXTRACTED_DIR%\todo.txt" (
     echo Creating todo.txt...
-    echo # Your tasks go here > "%TODO_LIST_DIR%\todo.txt"
+    echo # Your tasks go here > "%EXTRACTED_DIR%\todo.txt"
 )
 
-:: Run reminder.py
+:: Run reminder.py from Todo_List_Program-main
 :RunReminder
 echo Launching reminder.py...
-%PYTHON_COMMAND% "%TODO_LIST_DIR%\reminder.py"
+%PYTHON_COMMAND% "%EXTRACTED_DIR%\reminder.py"
 
 echo All done!
 pause
