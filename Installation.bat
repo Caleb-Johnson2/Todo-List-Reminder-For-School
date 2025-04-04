@@ -36,7 +36,7 @@ if exist "%EXTRACTED_DIR%\reminder.py" (
 
 :: Install dependencies
 echo Installing required Python dependencies...
-%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
+%PYTHON_COMMAND% -m pip install keyboard plyer
 
 :: Ensure Todo_List_Program folder exists
 if not exist "%BASE_DIR%" mkdir "%BASE_DIR%"
