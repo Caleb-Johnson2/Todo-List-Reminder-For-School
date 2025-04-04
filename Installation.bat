@@ -66,7 +66,7 @@ if not exist "%EXTRACTED_DIR%\reminder.py" (
 :: Create todo.txt if it doesn't exist
 if not exist "%EXTRACTED_DIR%\todo.txt" (
     echo Creating todo.txt...
-    echo # Your tasks go here > "%EXTRACTED_DIR%\todo.txt"
+    echo - [ ] New Task > "%EXTRACTED_DIR%\todo.txt"
 )
 
 :: Run reminder.py from Todo_List_Program-main
