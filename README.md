@@ -138,7 +138,7 @@ Alt+Num -: Instant summary report of tasks.
 
 Alt+Num *: Detailed task report with due dates.
 
-_If you wish to change these hotkeys, edit 'keyboard.add_hotkey("num -", send_report)' and 'keyboard.add_hotkey("num *", send_full_task_report)'_
+_If you wish to change these hotkeys, edit them within reminder.py_
 
 **Editing todo.txt:**
 
@@ -153,7 +153,7 @@ Default is 30 minutes (1800 seconds), adjustable by modifying REMINDER_INTERVAL.
 
 **With this manual, you should be able to effectively use the hotkeys, format your tasks in todo.txt, and customize the time interval for notifications.**
 
-### TO START PROGRAM, RUN INSTALLATION.BAT 
+### TO START PROGRAM, RUN INSTALLATION.BAT IN DOWNLOADS, NOT IN THE FOLDER
 ### CLOSE TERMINAL TO STOP PROGRAM
 ### TERMINAL WILL CLOSE ONCE ALL TASKS ARE COMPLETE
 
