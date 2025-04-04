@@ -136,8 +136,8 @@ def main():
         threading.Thread(target=send_full_task_report, daemon=True).start()
 
     # Use threads so hotkey functions don’t block the main loop
-    keyboard.add_hotkey("num -", send_report_thread)
-    keyboard.add_hotkey("num *", send_full_task_report_thread)
+    keyboard.add_hotkey("alt+num -", send_report_thread)
+    keyboard.add_hotkey("alt+num *", send_full_task_report_thread)
 
     while True:
         now = datetime.datetime.now()
