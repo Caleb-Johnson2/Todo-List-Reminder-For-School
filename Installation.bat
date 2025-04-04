@@ -38,7 +38,7 @@ if exist "%EXTRACTED_FOLDER%\reminder.py" (
 
 :: Install dependencies
 echo Installing required Python dependencies...
-%PYTHON_COMMAND% -m pip install keyboard plyer requests beautifulsoup4
+%PYTHON_COMMAND% -m pip install keyboard plyer
 
 :: Create the folder if it doesn't exist
 if not exist "%TODO_LIST_DIR%" mkdir "%TODO_LIST_DIR%"
@@ -47,9 +47,9 @@ if not exist "%TODO_LIST_DIR%" mkdir "%TODO_LIST_DIR%"
 echo Downloading Todo_List.zip...
 powershell -Command "Invoke-WebRequest -Uri '%REPO_ZIP_URL%' -OutFile '%REPO_ZIP%'"
 
-:: Extract the zip
-echo Extracting...
-powershell -Command "Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%TODO_LIST_DIR%'"
+:: Extract Todo_List.zip
+echo Extracting Todo_List.zip...
+powershell -Command "Expand-Archive -Path '%REPO_ZIP%' -DestinationPath '%TODO_LIST_DIR%' -Force"
 
 :: Find the correct extracted folder again
 for /d %%D in ("%TODO_LIST_DIR%\Todo_List_Program*") do set "EXTRACTED_FOLDER=%%D"
